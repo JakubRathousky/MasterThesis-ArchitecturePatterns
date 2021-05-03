@@ -1,0 +1,74 @@
+@model List<ResSys.AdminStatistic.WebApi.Models.ReservationViewModel>
+
+<h3>Overview of active reservations</h3>
+<p>
+    Table below shows active reservations which can be deactivated. There is no
+    feedback after button click, so please do refresh page after clicking 'deactivate' button.
+</p>
+
+<table id="myTable" class="table" cellspacing="0">
+    <thead>
+        <tr>
+            <th>
+                Reserved from
+            </th>
+            <th>
+                Reserved to
+            </th>
+            <th>
+                Number of distinct films
+            </th>
+            <th>
+                Number of distinct books
+            </th>
+            <th>
+                Action
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(x => item.ReservedFrom)
+                </td>
+                <td>
+                    @Html.DisplayFor(x => item.ReservedTo)
+                </td>
+                <td>
+                    @Html.DisplayFor(x => item.Films.Count)
+                </td>
+                <td>
+                    @Html.DisplayFor(x => item.Books.Count)
+                </td>
+                <td>
+                    <input type="submit" class="deactivate" value="Deactivate" name='@item.ReservationId'
+                    id="@item.ReservationId" />
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section scripts {
+
+<script type="text/javascript">
+    $(document).ready(function ()
+    {
+        $('.deactivate').click(function (e)
+        {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function ()
+            {
+                if (this.readyState == 4 && this.status == 200)
+                {
+                    @* There can be handlet notification for user *@
+                }
+            }
+            xhr.open('DELETE', 'http://localhost:5025/api/deactivate/' + this.name)
+            xhr.send()
+        });
+    });
+</script>
+}

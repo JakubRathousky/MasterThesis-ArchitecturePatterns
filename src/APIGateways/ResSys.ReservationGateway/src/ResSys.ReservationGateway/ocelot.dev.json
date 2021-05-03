@@ -1,0 +1,105 @@
+{
+    "Routes": [
+        {
+            "DownstreamPathTemplate": "/books",
+            "DownstreamScheme": "https",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "172.28.1.4",
+                    "Port": 5005
+                }
+            ],
+            "UpstreamPathTemplate": "/api/books",
+            "UpstreamHttpMethod": [
+                "GET"
+            ]
+        },
+        {
+            "DownstreamPathTemplate": "/books/{id}",
+            "DownstreamScheme": "https",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "172.28.1.4",
+                    "Port": 5005
+                }
+            ],
+            "UpstreamPathTemplate": "/api/books/{id}",
+            "UpstreamHttpMethod": [
+                "GET"
+            ]
+        },
+        {
+            "DownstreamPathTemplate": "/films",
+            "DownstreamScheme": "https",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "172.28.1.5",
+                    "Port": 5003
+                }
+            ],
+            "UpstreamPathTemplate": "/api/films",
+            "UpstreamHttpMethod": [
+                "GET"
+            ]
+        },
+        {
+            "DownstreamPathTemplate": "/films/{id}",
+            "DownstreamScheme": "https",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "172.28.1.5",
+                    "Port": 5003
+                }
+            ],
+            "UpstreamPathTemplate": "/api/films/{id}",
+            "UpstreamHttpMethod": [
+                "GET"
+            ]
+        },
+        {
+            "DownstreamPathTemplate": "/reservation/film/{id}",
+            "DownstreamScheme": "https",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "172.28.1.7",
+                    "Port": 5013
+                }
+            ],
+            "UpstreamPathTemplate": "/api/reservation/film/{id}",
+            "UpstreamHttpMethod": [
+                "GET"
+            ]
+        },
+        {
+            "DownstreamPathTemplate": "/reservation/book/{id}",
+            "DownstreamScheme": "https",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "172.28.1.7",
+                    "Port": 5013
+                }
+            ],
+            "UpstreamPathTemplate": "/api/reservation/book/{id}",
+            "UpstreamHttpMethod": [
+                "GET"
+            ]
+        },
+        {
+            "DownstreamPathTemplate": "/reservation",
+            "DownstreamScheme": "https",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "172.28.1.7",
+                    "Port": 5013
+                }
+            ],
+            "UpstreamPathTemplate": "/api/reservation",
+            "UpstreamHttpMethod": [
+                "POST"
+            ]
+        }
+    ],
+    "GlobalConfigurations": {
+        "BaseUrl": "https://172.28.1.11:5021"
+    }
+}

@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+    <PackageReference Include="ResSys.Common" Version="1.1.5"/>
+    <PackageReference Include="ResSys.BookCatalog.Contracts" Version="1.0.7"/>
+    <PackageReference Include="ResSys.Logistic.Contracts" Version="1.0.1"/>
+    <PackageReference Include="Microsoft.Extensions.Http.Polly" Version="5.0.1"/>
+  </ItemGroup>
+</Project>
+
+<!-- dotnet nuget add source C:\Users\jakub.rathousky\Documents\school\MasterThesis-Code\Project\packages -n ResSys -->

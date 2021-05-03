@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <CopyRefAssembliesToPublishDirectory>false</CopyRefAssembliesToPublishDirectory>
+    <UserSecretsId>0d2b29d0-8937-4182-89a0-aba73ebb647e</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.14"/>
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.13"/>
+    <PackageReference Include="Autofac.Configuration" Version="6.0.0"/>
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="7.1.0"/>
+    <PackageReference Include="ResSys.Common" Version="1.1.2"/>
+    <PackageReference Include="jQuery.UI" Version="1.12.1.1"/>
+    <PackageReference Include="jQuery" Version="3.6.0"/>
+    <ProjectReference Include="..\ResSys.AdminStatistic.Application\ResSys.AdminStatistic.Application.csproj"/>
+    <ProjectReference Include="..\ResSys.AdminStatistic.Infrastructure\ResSys.AdminStatistic.Infrastructure.csproj"/>
+  </ItemGroup>
+</Project>

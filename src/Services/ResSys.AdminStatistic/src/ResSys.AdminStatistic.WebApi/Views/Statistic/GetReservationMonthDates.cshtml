@@ -1,0 +1,32 @@
+@model ResSys.AdminStatistic.WebApi.Models.MonthReservationViewModel
+
+<h3>Statistical output for number of reservations per month</h3>
+<p>
+    Table below shows how many reservations were made in each month together
+</p>
+
+<table id="myTable" class="table" cellspacing="0">
+    <thead>
+        <tr>
+            <th>
+                Number of month
+            </th>
+            <th>
+                Number of reservations created
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Count)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(x => item.Month). month
+                </td>
+                <td>
+                    @Html.DisplayFor(x => item.Number)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

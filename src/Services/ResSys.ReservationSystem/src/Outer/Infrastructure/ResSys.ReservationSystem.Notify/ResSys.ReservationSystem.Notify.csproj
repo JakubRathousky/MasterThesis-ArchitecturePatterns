@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ResSys.ReservationSystem.Contracts\ResSys.ReservationSystem.Contracts.csproj" />
+    <ProjectReference Include="..\..\..\\Application\ResSys.ReservationSystem.Service\ResSys.ReservationSystem.Service.csproj" />
+  </ItemGroup>
+</Project>

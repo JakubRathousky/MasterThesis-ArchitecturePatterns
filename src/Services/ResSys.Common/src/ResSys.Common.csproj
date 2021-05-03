@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="MongoDB.Driver" Version="2.12.1"/>
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="5.0.0"/>
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="6.0.0-preview.2.21154.6"/>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0-preview.2.21154.6"/>
+    <PackageReference Include="MassTransit.RabbitMQ" Version="7.1.8"/>
+    <PackageReference Include="AspNetCore.HealthChecks.UI" Version="5.0.1"/>
+    <PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="5.0.1"/>
+    <PackageReference Include="Microsoft.AspNetCore.Routing" Version="2.2.2"/>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0"/>
+    <PackageReference Include="MassTransit.AspNetCore" Version="7.1.8"/>
+    <PackageReference Include="ResSys.FilmCatalog.Contracts" Version="1.0.3"/>
+    <PackageReference Include="ResSys.BookCatalog.Contracts" Version="1.0.4"/>
+  </ItemGroup>
+</Project>

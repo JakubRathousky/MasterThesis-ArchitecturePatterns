@@ -1,0 +1,239 @@
+# docekr run -d --rm --name mongo -p 27017:27017 -v mongodbdata:/data/db mongo
+
+version: "3.8"
+
+
+networks:
+  localnetwork:
+    driver: bridge
+    driver_opts:
+      com.docker.network.enable_ipv4: "true"
+    name: localnetwork
+    ipam:
+      driver: default
+      config:
+          - subnet: 172.28.1.0/16
+
+services:
+  rabbitmq: 
+    image: rabbitmq:3-management
+    hostname: "rabbitmq"
+    labels:
+      name: "rabbitmq"
+    ports:
+      - "4369:4369"
+      - "5671:5671"
+      - "5672:5672"
+      - "25672:25672"
+      - "15671:15671"
+      - "15672:15672"
+    networks:
+      localnetwork:
+        ipv4_address: 172.28.1.1
+
+  admin-statistic:
+    container_name: Admin_statistic
+    build: ./Services/ResSys.AdminStatistic/src/
+    restart: always
+    ports: 
+      - 5009:80
+    depends_on: 
+      - mongo
+      - rabbitmq
+    networks:
+      localnetwork:
+        ipv4_address: 172.28.1.2
+
+  author-catalog:
+    container_name: Author_catalog
+    build: ./Services/ResSys.AuthorCatalog/src/ResSys.AuthorCatalog.Service/
+    restart: always
+    ports: 
+      - 5011:80
+    depends_on: 
+      - mongo
+      - rabbitmq
+    networks:
+      localnetwork:
+        ipv4_address: 172.28.1.3
+
+  book-catalog:
+    container_name: Book_catalog
+    build: ./Services/ResSys.BookCatalog/src/ResSys.BookCatalog.Service/
+    restart: always
+    ports: 
+      - 5005:80
+    depends_on: 
+      - mongo
+      - rabbitmq
+    networks:
+      localnetwork:
+        ipv4_address: 172.28.1.4
+
+  film-catalog:
+    container_name: Film_service
+    build: ./Services/ResSys.FilmCatalog/src/ResSys.FilmCatalog.Service/
+    restart: always
+    ports: 
+      - 5003:80
+    depends_on: 
+      - mongo
+      - rabbitmq
+    networks:
+      localnetwork:
+        ipv4_address: 172.28.1.5
+
+  logistic:
+    container_name: Logistic
+    build: ./Services/ResSys.Logistic/src
+    restart: always
+    ports: 
+      - 5007:80
+    depends_on: 
+      - mongo
+      - rabbitmq
+    networks:
+      localnetwork:
+        ipv4_address: 172.28.1.6
+
+  reservation:
+    container_name: Reservation
+    build: ./Services/ResSys.ReservationSystem/src
+    restart: always
+    ports: 
+      - 5013:80
+    depends_on: 
+      - mongo
+      - rabbitmq
+    networks:
+      localnetwork:
+        ipv4_address: 172.28.1.7
+
+  health-checker:
+    container_name: HealthChecker
+    build: ./Web/HealthChecker
+    restart: always
+    ports: 
+      - 5027:80
+    depends_on: 
+      - mongo
+      - rabbitmq
+      - logistic
+      - reservation
+      - film-catalog
+      - book-catalog
+    networks:
+      localnetwork:
+        ipv4_address: 172.28.1.8
+
+
+  # postgres:
+  #   image: postgres:latest
+  #   container_name: postgres
+  #   restart: always
+  #   ports:
+  #     - 5432:5432
+  #   environment:
+  #     POSTGRES_PASSWORD: admin
+  #     POSTGRES_ID: admin
+  #   networks:
+  #     localnetwork:
+  #       ipv4_address: 172.28.1.9
+  #   volumes:
+  #     - postgresdata:/data/postgres/db
+
+  db:
+    image: "mcr.microsoft.com/mssql/server"
+    container_name: mssql
+    environment:
+        SA_PASSWORD: "Your_password123"
+        ACCEPT_EULA: "Y"
+    ports: 
+      - 1433:1433
+    volumes:
+      - mssqldbdata:/data/mssql/db
+    networks:
+      localnetwork:
+        ipv4_address: 172.28.1.13
+
+  mongo:
+    image: mongo
+    container_name: mongo
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodbdata:/data/mongo/db
+    networks:
+      localnetwork:
+        ipv4_address: 172.28.1.10
+
+  reservation-gateway:
+    container_name: Reservation-gateway
+    build: ./APIGateways/ResSys.ReservationGateway/src/ResSys.ReservationGateway
+    restart: always
+    ports: 
+      - 5021:80
+    depends_on: 
+      - mongo
+      - rabbitmq
+    networks:
+      localnetwork:
+        ipv4_address: 172.28.1.11
+
+  logistic-gateway:
+    container_name: Logistic-gateway
+    build: ./APIGateways/ResSys.LogisticGateway/src/ResSys.LogisticGateway
+    restart: always
+    ports: 
+      - 5023:80
+    depends_on: 
+      - mongo
+      - rabbitmq
+    networks:
+      localnetwork:
+        ipv4_address: 172.28.1.12
+
+  admin-gateway:
+    container_name: Admin-gateway
+    build: ./APIGateways/ResSys.AdministrationGateway/src/ResSys.AdministrationGateway
+    restart: always
+    ports: 
+      - 5025:80
+    depends_on: 
+      - mongo
+      - rabbitmq
+    networks:
+      localnetwork:
+        ipv4_address: 172.28.1.15
+
+
+  logistic-spa:
+    container_name: Logistic-SPA
+    build: ./Web/ResSys.LogisticWebAppSPA/src
+    restart: always
+    ports: 
+      - 5051:80
+    depends_on: 
+      - mongo
+      - rabbitmq
+    networks:
+      localnetwork:
+        ipv4_address: 172.28.1.51
+
+  reservation-spa:
+    container_name: reservation-SPA
+    build: ./Web/ResSys.ReservationWebAppSPA/src
+    restart: always
+    ports: 
+      - 5053:80
+    depends_on: 
+      - mongo
+      - rabbitmq
+    networks:
+      localnetwork:
+        ipv4_address: 172.28.1.53
+
+volumes:
+  mongodbdata:
+  mssqldbdata:
+  rabbitmqdata:

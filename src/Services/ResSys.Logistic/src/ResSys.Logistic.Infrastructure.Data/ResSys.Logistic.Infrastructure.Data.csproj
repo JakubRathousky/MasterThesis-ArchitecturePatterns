@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="ResSys.Common" Version="1.1.5"/>
+    <PackageReference Include="ResSys.Logistic.Contracts" Version="1.0.1"/>
+    <PackageReference Include="ResSys.FilmCatalog.Contracts" Version="1.0.10"/>
+    <PackageReference Include="ResSys.BookCatalog.Contracts" Version="1.0.7"/>
+
+
+    <ProjectReference Include="..\ResSys.Logistic.Domain\ResSys.Logistic.Domain.csproj"/>
+    <ProjectReference Include="..\ResSys.Logistic.Application\ResSys.Logistic.Application.csproj"/>
+
+  </ItemGroup>
+</Project>

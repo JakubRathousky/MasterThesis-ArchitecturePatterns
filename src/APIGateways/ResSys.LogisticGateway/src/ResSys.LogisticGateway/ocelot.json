@@ -1,0 +1,63 @@
+{
+    "Routes": [
+        {
+            "DownstreamPathTemplate": "/supply",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "172.28.1.6",
+                    "Port": 80
+                }
+            ],
+            "UpstreamPathTemplate": "/api/supply",
+            "UpstreamHttpMethod": [
+                "GET"
+            ]
+        },
+        {
+            "DownstreamPathTemplate": "/synchronize",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "172.28.1.6",
+                    "Port": 80
+                }
+            ],
+            "UpstreamPathTemplate": "/api/synchronize",
+            "UpstreamHttpMethod": [
+                "GET"
+            ]
+        },
+        {
+            "DownstreamPathTemplate": "/supply/{id}",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "172.28.1.6",
+                    "Port": 80
+                }
+            ],
+            "UpstreamPathTemplate": "/api/supply/{id}",
+            "UpstreamHttpMethod": [
+                "GET"
+            ]
+        },
+        {
+            "DownstreamPathTemplate": "/supply",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "172.28.1.6",
+                    "Port": 80
+                }
+            ],
+            "UpstreamPathTemplate": "/api/supply",
+            "UpstreamHttpMethod": [
+                "POST"
+            ]
+        }
+    ],
+    "GlobalConfigurations": {
+        "BaseUrl": "https://localhost:5022"
+    }
+}

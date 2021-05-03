@@ -1,0 +1,49 @@
+{
+    "Routes": [
+        {
+            "DownstreamPathTemplate": "/supply",
+            "DownstreamScheme": "https",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 5007
+                }
+            ],
+            "UpstreamPathTemplate": "/api/supply",
+            "UpstreamHttpMethod": [
+                "GET"
+            ]
+        },
+        {
+            "DownstreamPathTemplate": "/supply/{id}",
+            "DownstreamScheme": "https",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 5007
+                }
+            ],
+            "UpstreamPathTemplate": "/api/supply/{id}",
+            "UpstreamHttpMethod": [
+                "GET"
+            ]
+        },
+        {
+            "DownstreamPathTemplate": "/supply",
+            "DownstreamScheme": "https",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 5007
+                }
+            ],
+            "UpstreamPathTemplate": "/api/supply",
+            "UpstreamHttpMethod": [
+                "POST"
+            ]
+        }
+    ],
+    "GlobalConfigurations": {
+        "BaseUrl": "http://localhost:5022"
+    }
+}

@@ -1,0 +1,35 @@
+{
+    "Routes": [
+        {
+            "DownstreamPathTemplate": "/books",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 5005
+                }
+            ],
+            "UpstreamPathTemplate": "/api/books",
+            "UpstreamHttpMethod": [
+                "GET"
+            ]
+        },
+        {
+            "DownstreamPathTemplate": "/books/{id}",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "localhost",
+                    "Port": 5005
+                }
+            ],
+            "UpstreamPathTemplate": "/api/books/{id}",
+            "UpstreamHttpMethod": [
+                "GET"
+            ]
+        }
+    ],
+    "GlobalConfigurations": {
+        "BaseUrl": "http://localhost:5021"
+    }
+}

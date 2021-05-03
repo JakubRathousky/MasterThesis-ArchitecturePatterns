@@ -1,0 +1,22 @@
+{
+    "defaultAssembly": "ResSys.AdminStatistic.Infrastructure",
+    "modules": [
+        {
+            "type": "ResSys.AdminStatistic.Infrastructure.Modules.ApplicationModule",
+            "properties": {}
+        },
+        {
+            "type": "ResSys.AdminStatistic.Infrastructure.EntityFrameworkDataAccess.Module",
+            "properties": {
+                "ConnectionString": "Server=localhost,1433;Database=AdminStat;User=SA;Password=Your_password123"
+            }
+        },
+        {
+            "type": "ResSys.AdminStatistic.Infrastructure.ServiceBus.MassTransit.Module",
+            "properties": {
+                "Host": "amqp://guest:guest@localhost:5672",
+                "ServiceName": "AdminStat_Service"
+            }
+        }
+    ]
+}

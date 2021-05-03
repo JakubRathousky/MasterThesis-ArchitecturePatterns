@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ResSys.Common" Version="1.1.2"/>
+    <ProjectReference Include="..\ResSys.AdminStatistic.Domain\ResSys.AdminStatistic.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

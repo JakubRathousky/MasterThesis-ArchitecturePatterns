@@ -1,0 +1,19 @@
+using System;
+using ResSys.Common;
+
+namespace ResSys.FilmCatalog.Service.Entities
+{
+    public class Film : IEntity
+    {
+        public Guid Id { get; set; }
+        public string EIDR { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public int Rating { get; set; }
+        public Guid AuthorId { get; set; }
+        public int Amount { get; set; }
+        public int AuthorRegNum { get; set; }
+        public DateTimeOffset PublishDate { get; set; }
+        public DateTimeOffset CreatedDate { get; set; }
+    }
+}
