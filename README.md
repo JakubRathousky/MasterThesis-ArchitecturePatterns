@@ -1,8 +1,8 @@
-ResSys project is about implementation example of microservice ecosystem
+ResSys project is about an implementation example of microservice ecosystem
 where each service is implemented by one of the modern popular architectures
 such as Hexagonal, Clean and Onion.
 
-Projects simulates Reservation system of films and books.
+Project simulates Reservation system of films and books.
 Contains service for evidance of new supply arrival (Logistic),
 catalog services which store data about each product (book and film).
 Those books and films are available for reservation for a given 
@@ -183,11 +183,11 @@ begin our workflow.
 ![HealthChecker web app](images/HealthChecker.png?raw=true "HealthChecker web app")
 
 The process begins in Logistic web app. Front page displays all historical requests.
-If any row contain red colored date, it means that there was a problem
-in time of processing the creating request. By pressing "synchronize" you can start
+If any row contains red colored date, it means that there was a problem
+while processing the created request. By pressing "synchronize" you can start
 new attempt.
 
-To create new supply request, we navigate through upper menu "New supply" 
+To create a new supply request, we navigate through upper menu "New supply" 
 to form, which handles supply logic. To add book or film press the plus button, 
 a new input row will appear.
 
