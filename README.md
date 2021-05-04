@@ -1,6 +1,6 @@
 ResSys project is about implementation example of microservice ecosystem
 where each service is implemented by one of the modern popular architectures
-such as Hexegonal, Clean and Onion.
+such as Hexagonal, Clean and Onion.
 
 Projects simulates Reservation system of films and books.
 Contains service for evidance of new supply arrival (Logistic),
@@ -12,7 +12,7 @@ Solution is made od three user interfaces: Reservation and Statistics,
 both in React adapting MVVM, and the last one in Statistic
 designed by MVC, implemented by .Net Razor.
 
-![Alt text](Deployment_diagram.png?raw=true "Deployment diagram")
+![Alt text](images/Deployment_diagram.png?raw=true "Deployment diagram")
 
 ## Projects
 
@@ -33,7 +33,7 @@ designed by MVC, implemented by .Net Razor.
 | ReservationWebAppSpa | src/Web/ResSys.ReservationWebAppSpa   |  C#, React | handles reservation | 
 
 ## Installation
-### Prerequisities:
+### Prerequisites:
 - install `docker`
 - install `docker-compose`
 
@@ -45,12 +45,18 @@ designed by MVC, implemented by .Net Razor.
 - navigate to `localhost:5027/healthchecks-ui` in your browser to check out the healthcheck 
 
 ## Tests
-- run `dotnet-test` in `test` folders of project you want to test
+- run `dotnet test` in `test` folders of project you want to test
 
 ## Development
 - if you change the source code of a project `<XYZ>`, you can restart respective service by typing the following
   - `docker-compose build <XYZ>`
   - `docker-compose up -d <XYZ>`
+
+## Frontends
+- HealthChecker : http://localhost:5027/healthchecks-ui#/healthchecks
+- Logistic : http://localhost:5051/
+- ReservationSystem : http://localhost:5053/
+- Statistics : http://localhost:5009/
 
 ## Services
 Table below shows distribution of assigned Ip address and ports. This setting is set in `docker-compose.yml` file.
@@ -134,7 +140,7 @@ services about new reservation creation.
 | /reservation/book/{id}/{date}    | GET   |  returns number of active reservations of given book in specified date  |
 | /reservation/film/{id}/{date}    | GET   |  returns number of active reservations of given film in specified date  | 
 | /reservation    | POST   |  saves new reservation   | 
-| /reservation/{id}    | DELETE   |  deatives reservation with given Id   | 
+| /reservation/{id}    | DELETE   |  deactivates reservation with given Id   | 
 #### Health-checker
 Monitors life of services, overview available on adress:
 http://localhost:PORT/healthchecks-ui#/healthchecks 
@@ -145,7 +151,7 @@ MSSQL database for storing data used by Statistic service.
 
 #### Mongo
 Document based database used for simple collection storing.
-Specificly used by Film-catalog, Book-catalog, reservation and logistic services.
+Specifically used by Film-catalog, Book-catalog, reservation and logistic services.
 #### Reservation-gateway
 Gateway which is used to redirect requests from reservation frontend to services.
 #### Logistic-gateway
@@ -165,3 +171,67 @@ Serves for MSSQL server data storage
 - mssqldbdata
 Used by RabbitMQ for data persistence
 - rabbitmqdata
+
+## Manual
+Application does not contain any created intern data, such as films, books and reservations.
+The only data, that are seeded, are authors with Registration number from 1 to 9.
+
+So the first step is to start the application and navigate to HealthChecker web.
+This web shows if all services started and are running. If so, we are ready to
+begin our workflow.
+
+![HealthChecker web app](images/HealthChecker.png?raw=true "HealthChecker web app")
+
+The process begins in Logistic web app. Front page displays all historical requests.
+If any row contain red colored date, it means that there was a problem
+in time of processing the creating request. By pressing "synchronize" you can start
+new attempt.
+
+To create new supply request, we navigate through upper menu "New supply" 
+to form, which handles supply logic. To add book or film press the plus button, 
+a new input row will appear.
+
+![New supply input row](images/NewSupply.png?raw=true "Form for supply request creation")
+
+Fill the row with your data, please fill all of the input fields, this form
+does not handle incorrectly submitted data neither notifies user. Fill
+as many rows as you want and click "Submit" button.
+
+![Filled supply form](images/NewSupplyFilled.png?raw=true "Filled supply form")
+
+If all data are correctly filled, you will be redirected to the front page, which should contain your request.
+
+![Supply overview with not synchronized supply](images/LogisticOverviewError.png?raw=true "Supply overview with not synchronized supply")
+
+For this demonstration I have skipped creation of film, so the overview
+signalizes that there was a problem and not all supplies have been created.
+
+After clicking "Synchronize" button, logistic service will try to repair
+all supplies with problems. 
+![Supply overview with synchronized supply](images/LogisticOverviewSuccess.png?raw=true "Supply overview with synchronized supply")
+
+As we can see, synchronization was successfully processed. With supplies
+in store, we can offer them for reservation. To perform this act,
+we go to Reservation web app. Reservation app contains only the front page,
+this front page shows available supplies to reserve. 
+
+![Reservation app with supply overview](images/Reservation.png?raw=true "Supply overview in reservation app")
+
+We can choose any of the offered supplies, just specify amount of
+films and books you want to borrow to specified date. By
+clicking on "Reserve" button we submit the form and reservation
+should be created. To see list of created reservation
+we have to go to Statistics web app.
+
+![Overview of active reservations](images/ReservationOverview.png?raw=true "Overview of active reservations")
+
+"Deactivate" buttons triggers deactivation of reservation.
+After this action, reservation will deactivate and reserved
+supplies will be available again. After deactivation
+refresh page and reservation should not be visible anymore.
+
+"Month distribution" page shows basic summarization of
+reservations created in each month. Fifth month shows number 1
+as we have created only one reservation.
+
+![Month distribution of created reservations](images/MonthDistribution.png?raw=true "Month distribution of created reservations")

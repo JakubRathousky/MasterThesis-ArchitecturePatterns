@@ -13,6 +13,7 @@
     <PackageReference Include="ResSys.Common" Version="1.1.2"/>
     <PackageReference Include="jQuery.UI" Version="1.12.1.1"/>
     <PackageReference Include="jQuery" Version="3.6.0"/>
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.HealthChecks" Version="2.2.0"/>
     <ProjectReference Include="..\ResSys.AdminStatistic.Application\ResSys.AdminStatistic.Application.csproj"/>
     <ProjectReference Include="..\ResSys.AdminStatistic.Infrastructure\ResSys.AdminStatistic.Infrastructure.csproj"/>
   </ItemGroup>

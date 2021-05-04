@@ -22,7 +22,6 @@ namespace ResSys.AdminStatistic.WebApi
                 .UseServiceProviderFactory(new AutofacServiceProviderFactory())
                 .ConfigureAppConfiguration((builderContext, config) =>
                 {
-                    // Microsoft.Extensions.Hosting.IHostingEnvironment env = (Microsoft.Extensions.Hosting.IHostingEnvironment)builderContext.HostingEnvironment;
                     config.AddJsonFile("autofac.entityframework.json");
                     // config.AddJsonFile("autofac.dev.json");
                     config.AddEnvironmentVariables();

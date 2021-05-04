@@ -62,7 +62,7 @@ export class SupplyOverview extends Component
   {
     let msg = this.state?.syncCalled ? (<Grid.Row key={"notifikace"}>
       <Grid.Column width={13}>
-        <h3><strong>Synchronization complated</strong></h3>
+        <h3><strong>Synchronization completed</strong></h3>
       </Grid.Column>
     </Grid.Row>
     ) : "";

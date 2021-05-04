@@ -9,6 +9,7 @@ using Autofac;
 using MassTransit;
 using ResSys.Common;
 using ResSys.Common.HealthChecksService;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 
 namespace ResSys.AdminStatistic.WebApi
 {
@@ -24,7 +25,6 @@ namespace ResSys.AdminStatistic.WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddHealthCheck();
             services.AddMassTransitHostedService();
             services.AddCors(options =>
             {
@@ -35,6 +35,7 @@ namespace ResSys.AdminStatistic.WebApi
             });
 
             services.AddControllersWithViews();
+            services.AddHealthCheck();
         }
         public void ConfigureContainer(ContainerBuilder builder)
         {
@@ -68,7 +69,13 @@ namespace ResSys.AdminStatistic.WebApi
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
 
-                endpoints.AddHealthCheckEndpoints();            });
+                // endpoints.AddHealthCheckEndpoints();
+                endpoints.MapHealthChecks("/health", new HealthCheckOptions()
+                {
+                    Predicate = reg => reg.Tags.Contains("service"),
+                    ResponseWriter = HealthChecks.UI.Client.UIResponseWriter.WriteHealthCheckUIResponse
+                });
+            });
         }
     }
 }
