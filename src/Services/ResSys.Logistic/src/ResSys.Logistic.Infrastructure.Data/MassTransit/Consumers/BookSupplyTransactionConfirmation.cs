@@ -9,12 +9,10 @@ namespace ResSys.Logistic.Infrastructure.Data.MassTransit.Consumers
     public class SupplyBookConsumer : IConsumer<BookSupplyTransactionConfirmation>
     {
         private readonly IStockSupplyRepository repository;
-        private readonly IPublishEndpoint publishEndpoint;
 
-        public SupplyBookConsumer(IStockSupplyRepository repository, IPublishEndpoint publishEndpoint)
+        public SupplyBookConsumer(IStockSupplyRepository repository)
         {
             this.repository = repository;
-            this.publishEndpoint = publishEndpoint;
         }
 
         public async Task Consume(ConsumeContext<BookSupplyTransactionConfirmation> context)

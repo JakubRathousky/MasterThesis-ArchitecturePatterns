@@ -21,13 +21,15 @@ namespace ResSys.AdminStatistic.Application.Tests
         private readonly IRepository<Film> filmsRepository;
 
         private readonly IFilmNotifier notifier;
-        private readonly IAuthorClient authorClient;
+        private readonly HttpClient httpClient;
+        private readonly AuthorClient author;
         public FilmServiceTests()
         {
             transRepository = Substitute.For<IRepository<FilmCatalog.Service.Entities.Transaction>>();
             filmsRepository = Substitute.For<IRepository<Film>>();
             notifier = Substitute.For<IFilmNotifier>();
-            authorClient = Substitute.For<IAuthorClient>();
+            httpClient = Substitute.For<HttpClient>();
+            author = Substitute.For<AuthorClient>(httpClient);
         }
 
         [Theory]
@@ -42,7 +44,7 @@ namespace ResSys.AdminStatistic.Application.Tests
                 filmsRepository,
                 transRepository,
                 notifier,
-                authorClient
+                author
             );
 
             // transRepository
@@ -51,7 +53,7 @@ namespace ResSys.AdminStatistic.Application.Tests
             // filmsRepository
             //     .GetAsync(filmIdGuid)
             //     .ReturnsForAnyArgs(null);
-            authorClient
+            author
                 .GetAuthorIdAsync(authorRegNum)
                 .ReturnsForAnyArgs(authorIdGuid);
 
@@ -89,7 +91,7 @@ namespace ResSys.AdminStatistic.Application.Tests
                 filmsRepository,
                 transRepository,
                 notifier,
-                authorClient
+                author
             );
 
             var amount2 = 10;
@@ -103,7 +105,7 @@ namespace ResSys.AdminStatistic.Application.Tests
             filmsRepository
                 .GetAsync(x => x.EIDR == eidr)
                 .ReturnsForAnyArgs(film);
-            authorClient
+            author
                 .GetAuthorIdAsync(authorRegNum)
                 .ReturnsForAnyArgs(authorIdGuid);
 
@@ -134,7 +136,7 @@ namespace ResSys.AdminStatistic.Application.Tests
                 filmsRepository,
                 transRepository,
                 notifier,
-                authorClient
+                author
             );
 
             transRepository
@@ -143,7 +145,7 @@ namespace ResSys.AdminStatistic.Application.Tests
             // filmsRepository
             //     .GetAsync(filmIdGuid)
             //     .ReturnsForAnyArgs(null);
-            authorClient
+            author
                 .GetAuthorIdAsync(authorRegNum)
                 .ReturnsForAnyArgs(authorIdGuid);
 
